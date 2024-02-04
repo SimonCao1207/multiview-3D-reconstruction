@@ -1,4 +1,5 @@
 import open3d as o3d
+from utils import show_pcd
 import numpy as np
 DATA_PATH = "./data/NotreDame/notredame.out" 
 PLY_PATH = "./data/NotreDame/notredame.ply" 
@@ -90,13 +91,11 @@ def write_ply_file(ply_file, cameras, points, decimate_step=1, write_cameras=1):
             f.write(f"{p[0]} {p[1]} {p[2]} 255 255 0\n")
     f.close()
 
-
 if __name__ == "__main__":
     cameras, points = read_bundle(DATA_PATH)
     # pc = create_point_cloud(points)
     # o3d.visualization.draw_geometries([pc])
 
     write_ply_file(PLY_PATH, cameras, points, write_cameras=0)
-    pcd = o3d.io.read_point_cloud(PLY_PATH)
-    o3d.visualization.draw_geometries([pcd])
+    show_pcd(PLY_PATH)
 
